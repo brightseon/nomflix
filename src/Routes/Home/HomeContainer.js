@@ -26,7 +26,7 @@ export default class extends Component {
             console.log('HomeContainer.js componentDidMount error : ', err);
 
             this.setState({
-                error : 'Cant find movies information.'
+                error : 'Cant find movie information.'
             });
         } finally {
             this.setState({
@@ -37,7 +37,6 @@ export default class extends Component {
 
     render() {
         const { nowPlaying, upcoming, popular, error, loading } = this.state;
-        console.log(this.state);
 
         return (
             <HomePresenter nowPlaying={ nowPlaying } upcoming={ upcoming } popular={ popular }
