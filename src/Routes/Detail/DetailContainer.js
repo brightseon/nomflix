@@ -13,9 +13,7 @@ export default class extends Component {
         const parsedId = parseInt(id);
 
         if(isNaN(parsedId)) {
-            push('/');
-
-            return;
+            return push('/');
         }
     };
 
