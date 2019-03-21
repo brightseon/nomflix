@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Loader from 'Components/Loader';
 import Section from 'Components/Section';
+import Message from 'Components/Message';
 
 const Container = styled.div`
     padding : 0px 20px;
@@ -40,12 +41,18 @@ const SearchPresenter = ({ movieResults, tvResults, loading, searchTerm, error, 
                         tvResults && tvResults.length > 0 && (
                             <Section title="TV Show Results">
                                 { 
-                                    tvResults.map(show => <span key={ show.id }>{ show.title }</span>)
+                                    tvResults.map(show => <span key={ show.id }>{ show.name }</span>)
                                 }
                             </Section>
                         )
                     }
                 </>
+            )
+        }
+        { error && <Message text={ error } color="#E74C3C" /> }
+        { 
+            tvResults && movieResults && tvResults.length === 0 && movieResults.length === 0 && (
+                <Message text="Noting found" color="#95A5A6" />
             )
         }
     </Container>
