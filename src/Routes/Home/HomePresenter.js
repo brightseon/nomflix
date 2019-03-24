@@ -17,7 +17,8 @@ const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error }) => loa
                 <Section title="Now Playing">
                     { 
                         nowPlaying.map(movie => 
-                            <Poster />
+                            <Poster key={ movie.id } id={ movie.id } title={ movie.original_title } imageUrl={ movie.poster_path }
+                                isMovie={ true } rating={ movie.vote_average } year={ movie.release_date && movie.release_date.substring(0, 4) } />
                         )
                     }
                 </Section>
@@ -28,7 +29,8 @@ const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error }) => loa
                 <Section title="Upcoming Movies">
                     { 
                         upcoming.map(movie => 
-                            <Poster />
+                            <Poster key={ movie.id } id={ movie.id } title={ movie.original_title } imageUrl={ movie.poster_path }
+                                isMovie={ true } rating={ movie.vote_average } year={ movie.release_date && movie.release_date.substring(0, 4) } />
                         )
                     }
                 </Section>
@@ -39,7 +41,8 @@ const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error }) => loa
                 <Section title="Popular Movies">
                     { 
                         popular.map(movie => 
-                            <Poster />
+                            <Poster key={ movie.id } id={ movie.id } title={ movie.original_title } imageUrl={ movie.poster_path }
+                                isMovie={ true } rating={ movie.vote_average } year={ movie.release_date && movie.release_date.substring(0, 4) } />
                         )
                     }
                 </Section>
