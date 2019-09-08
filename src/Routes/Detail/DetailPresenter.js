@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import Loader from 'Components/Loader';
+import TabContents from '../../Components/TabContents';
 
 const Container = styled.div`
     height : calc(100vh - 50px);
@@ -45,6 +47,8 @@ const Cover = styled.div`
 const Data = styled.div`
     width : 70%;
     margin-left : 10px;
+    display: flex;
+    flex-direction: column;
 `;
 
 const Title = styled.h3`
@@ -54,9 +58,16 @@ const Title = styled.h3`
 
 const ItemContainer = styled.div`
     margin : 20px 0;
+    display: flex;
+    align-items: center;
 `;
 
 const Item = styled.span``;
+
+const IMDB = styled.img`
+    width: 28px;
+    cursor: pointer;
+`;
 
 const Divider = styled.span`
     margin : 0 10px;
@@ -69,7 +80,19 @@ const Overview = styled.div`
     width : 50%;
 `;
 
-const DetailPresenter = ({ result, loading, error }) => loading ? (
+const Tabs = styled.div`
+    display: flex;
+`;
+
+const Tab = styled(Link)`
+    padding: 15px 20px;
+    margin-top: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    border-bottom : ${ props => props.isActive ? '4px solid #FFF' : 'none' };
+`;
+
+const DetailPresenter = ({ result, loading, error, isMovie, pathname }) => loading ? (
         <>
             <Helmet>
                 <title>Loading | Nomflix</title>
@@ -101,8 +124,27 @@ const DetailPresenter = ({ result, loading, error }) => loading ? (
                                 )
                             }
                         </Item>
+                        {
+                            result.imdb_id && (
+                                <>
+                                    <Divider>•</Divider>
+                                    <Item>
+                                        <a href={ `https://www.imdb.com/title/${ result.imdb_id }` } target="noopener">
+                                            <IMDB src="https://upload.wikimedia.org/wikipedia/commons/6/69/IMDB_Logo_2016.svg"></IMDB>
+                                        </a>
+                                    </Item>
+                                </>
+                            )
+                        }
                     </ItemContainer>
                     <Overview>{ result.overview }</Overview>
+                    <Tabs>
+                        <Tab to={ `/${ isMovie ? 'movie' : 'show' }/${ result.id }/videos` } isActive={ pathname.includes('/videos') }>Videos</Tab>
+                        <Tab to={ `/${ isMovie ? 'movie' : 'show' }/${ result.id }/production-companies` } isActive={ pathname.includes('/production-companies') }>Production Companies</Tab>
+                        <Tab to={ `/${ isMovie ? 'movie' : 'show' }/${ result.id }/production-countries` } isActive={ pathname.includes('/production-countries') }>Production Countries</Tab>
+                        { !isMovie && <Tab to={ `/show/${ result.id }/seasons` } isActive={ pathname.includes('/seasons') }>Seasons</Tab> }
+                    </Tabs>
+                    <TabContents result={ result } />
                 </Data>
             </Content>
         </Container>
