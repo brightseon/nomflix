@@ -90,6 +90,7 @@ const Tab = styled(Link)`
     background-color: rgba(255, 255, 255, 0.2);
     cursor: pointer;
     border-bottom : ${ props => props.isActive ? '4px solid #FFF' : 'none' };
+    font-weight: ${ props => props.isActive ? 'bold' : 'normal' };
 `;
 
 const DetailPresenter = ({ result, loading, error, isMovie, pathname }) => loading ? (

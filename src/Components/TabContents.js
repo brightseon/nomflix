@@ -12,10 +12,10 @@ const Contents = styled.div`
     overflow-y: auto;
     display: grid;
     grid-gap: 10px;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    /* grid-auto-rows: auto; */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     grid-template-rows: repeat(auto-fill, minmax(150px, 1fr));
     background-color: rgba(255, 255, 255, 0.1);
+    position: relative;
 `;
 
 const TabContents = ({ result }) => (
@@ -26,7 +26,7 @@ const TabContents = ({ result }) => (
         <Route path="/show/:id/videos" component={ () => <Videos videos={ result.videos.results } /> } />
         <Route path="/show/:id/production-companies" component={ () => <ProductionCompanies productionCompany={ result.production_companies } /> } />
         <Route path="/show/:id/production-countries" component={ () => <ProductionCountries productionCountry={ result.production_countries } /> } />
-        <Route path="/show/:id/seasons" component={ () => <Seasons season={ result.seasons } /> } />
+        <Route path="/show/:id/seasons" component={ () => <Seasons seasons={ result.seasons } /> } />
     </Contents>
 );
 
